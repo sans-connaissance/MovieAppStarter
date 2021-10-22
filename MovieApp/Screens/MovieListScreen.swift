@@ -9,12 +9,16 @@ import SwiftUI
 
 struct MovieListScreen: View {
     
+    @StateObject private var movieListVM = MovieListViewModel()
     @State private var isPresented: Bool = false
     
     var body: some View {
         List {
             
-            Text("Movies")
+            ForEach(movieListVM.movies, id: \.id) { movie in
+                Text(movie.title)
+                
+            }
             
         }.listStyle(PlainListStyle())
         .navigationTitle("Movies")
@@ -29,6 +33,7 @@ struct MovieListScreen: View {
         .embedInNavigationView()
         
         .onAppear(perform: {
+            movieListVM.getAllMovies()
             
         })
     }
