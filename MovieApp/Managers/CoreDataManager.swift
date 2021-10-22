@@ -14,14 +14,31 @@ class CoreDataManager {
     
     static let shared = CoreDataManager()
     
+    let containerPath = Bundle.main.path(forResource: "MoveAppModel", ofType: "sqlite")
+    
     private init() {
         
-        persistentContainer = NSPersistentContainer(name: "MovieAppModel")
+        persistentContainer = NSPersistentContainer(name: "MoveAppModel")
+//        persistentContainer.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: containerPath ?? "/dev/null")
         persistentContainer.loadPersistentStores { (description, error) in
             if let error = error {
                 fatalError("Failed to initialize Core Data \(error)")
             }
         }
+    }
+    
+    func getAllMovies() -> [Movie] {
+        let fetchRequest: NSFetchRequest<Movie> = Movie.fetchRequest()
+        
+        do {
+            return try persistentContainer.viewContext.fetch(fetchRequest)
+            
+        } catch {
+            
+            return []
+        }
+        
+        
     }
     
     func save() {

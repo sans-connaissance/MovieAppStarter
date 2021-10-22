@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		414AD1452721CB4600316A45 /* AddMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414AD1442721CB4600316A45 /* AddMovieViewModel.swift */; };
+		414AD1472723037600316A45 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414AD1462723037600316A45 /* MovieListViewModel.swift */; };
 		41E5A49C2721B5E600A51D80 /* MoveAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41E5A49A2721B5E600A51D80 /* MoveAppModel.xcdatamodeld */; };
 		41E5A4A52721B85E00A51D80 /* Movie+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5A4A32721B85E00A51D80 /* Movie+CoreDataClass.swift */; };
 		41E5A4A62721B85E00A51D80 /* Movie+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E5A4A42721B85E00A51D80 /* Movie+CoreDataProperties.swift */; };
@@ -24,6 +25,7 @@
 
 /* Begin PBXFileReference section */
 		414AD1442721CB4600316A45 /* AddMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewModel.swift; sourceTree = "<group>"; };
+		414AD1462723037600316A45 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		41E5A49B2721B5E600A51D80 /* MoveAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoveAppModel.xcdatamodel; sourceTree = "<group>"; };
 		41E5A4A32721B85E00A51D80 /* Movie+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataClass.swift"; sourceTree = "<group>"; };
 		41E5A4A42721B85E00A51D80 /* Movie+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				414AD1442721CB4600316A45 /* AddMovieViewModel.swift */,
+				414AD1462723037600316A45 /* MovieListViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -216,6 +219,7 @@
 				414AD1452721CB4600316A45 /* AddMovieViewModel.swift in Sources */,
 				8D0926C125E59B3B00502FF8 /* MovieAppApp.swift in Sources */,
 				8D5C25D025E6FA7C002BAF40 /* RatingView.swift in Sources */,
+				414AD1472723037600316A45 /* MovieListViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

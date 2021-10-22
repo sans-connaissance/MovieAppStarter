@@ -11,7 +11,7 @@ class AddMovieViewModel: ObservableObject {
     
     var title: String = ""
     var director: String = ""
-    var rating: Int? = nil
+   @Published var rating: Int? = nil
     var releaseDate: Date = Date()
     
     func save() {
