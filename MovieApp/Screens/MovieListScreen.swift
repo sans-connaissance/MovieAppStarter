@@ -16,7 +16,7 @@ struct MovieListScreen: View {
         List {
             
             ForEach(movieListVM.movies, id: \.id) { movie in
-                Text(movie.title)
+                MovieCell(movie: movie)
                 
             }
             
@@ -26,7 +26,7 @@ struct MovieListScreen: View {
             isPresented = true 
         })
         .sheet(isPresented: $isPresented, onDismiss: {
-            
+            movieListVM.getAllMovies()
         },  content: {
             AddMovieScreen()
         })
@@ -49,19 +49,21 @@ struct MovieListScreen_Previews: PreviewProvider {
 
 struct MovieCell: View {
     
+    let movie: MovieViewModel
+    
     
     var body: some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
-                Text("movie.title")
+                Text(movie.title)
                     .fontWeight(.bold)
-                Text("movie.director")
+                Text(movie.director)
                     .font(.caption2)
-                Text("movie.releaseDate ?? ")
+                Text(movie.releaseDate)
                     .font(.caption)
             }
             Spacer()
-            RatingView(rating: .constant(2))
+            RatingView(rating: .constant(movie.rating))
         }
     }
 }
