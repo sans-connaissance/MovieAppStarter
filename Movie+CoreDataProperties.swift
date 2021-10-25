@@ -2,7 +2,7 @@
 //  Movie+CoreDataProperties.swift
 //  MovieApp
 //
-//  Created by David Malicke on 10/21/21.
+//  Created by David Malicke on 10/25/21.
 //
 //
 
@@ -16,10 +16,28 @@ extension Movie {
         return NSFetchRequest<Movie>(entityName: "Movie")
     }
 
-    @NSManaged public var title: String?
     @NSManaged public var director: String?
     @NSManaged public var rating: Double
     @NSManaged public var releaseDate: Date?
+    @NSManaged public var title: String?
+    @NSManaged public var reviews: NSSet?
+
+}
+
+// MARK: Generated accessors for reviews
+extension Movie {
+
+    @objc(addReviewsObject:)
+    @NSManaged public func addToReviews(_ value: Review)
+
+    @objc(removeReviewsObject:)
+    @NSManaged public func removeFromReviews(_ value: Review)
+
+    @objc(addReviews:)
+    @NSManaged public func addToReviews(_ values: NSSet)
+
+    @objc(removeReviews:)
+    @NSManaged public func removeFromReviews(_ values: NSSet)
 
 }
 
