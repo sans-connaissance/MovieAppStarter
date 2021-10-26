@@ -11,6 +11,9 @@ struct ReviewListScreen: View {
     
     @State private var isPresented: Bool = false
     
+    let movie: MovieViewModel
+    
+    
     var body: some View {
         VStack {
             List(0...20, id: \.self) { index in
@@ -31,6 +34,7 @@ struct ReviewListScreen: View {
         .sheet(isPresented: $isPresented, onDismiss: {
             
         }, content: {
+            AddReviewScreen(movie: movie)
             
         })
         .onAppear(perform: {
@@ -40,7 +44,11 @@ struct ReviewListScreen: View {
 }
 
 struct ReviewListScreen_Previews: PreviewProvider {
+        
     static var previews: some View {
-        ReviewListScreen().embedInNavigationView()
+        
+        let movie = MovieViewModel(movie: Movie(context: CoreDataManager.shared.viewContext))
+        
+        ReviewListScreen(movie: movie).embedInNavigationView()
     }
 }

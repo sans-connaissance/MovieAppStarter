@@ -79,6 +79,7 @@ class CoreDataManager {
         do {
             try persistentContainer.viewContext.save()
         } catch {
+            persistentContainer.viewContext.rollback()
             print("Failed to save a movie \(error)")
         }
         

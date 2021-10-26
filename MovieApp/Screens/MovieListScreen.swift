@@ -12,13 +12,30 @@ struct MovieListScreen: View {
     @StateObject private var movieListVM = MovieListViewModel()
     @State private var isPresented: Bool = false
     
+    private func deleteMovie(at indexSet: IndexSet) {
+        indexSet.forEach { index in
+            let movie = movieListVM.movies[index]
+            // delete the movie
+            movieListVM.deleteMovie(movie: movie)
+            // get all movies
+            movieListVM.getAllMovies()
+        }
+    }
+    
     var body: some View {
         List {
             
             ForEach(movieListVM.movies, id: \.id) { movie in
-                MovieCell(movie: movie)
                 
-            }
+                NavigationLink {
+                    ReviewListScreen(movie: movie)
+                } label: {
+                    MovieCell(movie: movie)
+                }
+
+                
+                
+            }.onDelete(perform: deleteMovie)
             
         }.listStyle(PlainListStyle())
         .navigationTitle("Movies")
@@ -39,13 +56,6 @@ struct MovieListScreen: View {
     }
 }
 
-struct MovieListScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MovieListScreen()
-        }
-    }
-}
 
 struct MovieCell: View {
     
@@ -64,6 +74,14 @@ struct MovieCell: View {
             }
             Spacer()
             RatingView(rating: .constant(movie.rating))
+        }
+    }
+}
+
+struct MovieListScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            MovieListScreen()
         }
     }
 }
