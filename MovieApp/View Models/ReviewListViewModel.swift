@@ -10,6 +10,17 @@ import CoreData
 
 class ReviewListViewModel: ObservableObject {
     
+    @Published var reviews = [ReviewViewModel]()
+    
+    func getReviewsByMovie(vm: MovieViewModel) {
+        let movie = CoreDataManager.shared.getMovieById(id: vm.id)
+        if let movie = movie {
+            DispatchQueue.main.async {
+                
+            }
+        }
+        
+    }
    
     
 }

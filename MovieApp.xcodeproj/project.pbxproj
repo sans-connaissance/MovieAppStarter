@@ -65,13 +65,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		8D0926B425E59B3B00502FF8 = {
+		4139F52727279B5200E6EC5C /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4139F51F2727723400E6EC5C /* Review+CoreDataClass.swift */,
 				4139F5202727723400E6EC5C /* Review+CoreDataProperties.swift */,
 				4139F5212727723400E6EC5C /* Movie+CoreDataClass.swift */,
 				4139F5222727723400E6EC5C /* Movie+CoreDataProperties.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8D0926B425E59B3B00502FF8 = {
+			isa = PBXGroup;
+			children = (
 				8D0926BF25E59B3B00502FF8 /* MovieApp */,
 				8D0926BE25E59B3B00502FF8 /* Products */,
 			);
@@ -88,6 +95,7 @@
 		8D0926BF25E59B3B00502FF8 /* MovieApp */ = {
 			isa = PBXGroup;
 			children = (
+				4139F52727279B5200E6EC5C /* Models */,
 				8D5C25CE25E6FA70002BAF40 /* Views */,
 				8D5C25C625E6F3CB002BAF40 /* Extensions */,
 				8D2C953E25E69E3500459F4F /* Screens */,
