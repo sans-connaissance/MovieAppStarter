@@ -9,6 +9,7 @@ import Foundation
 import CoreData
 import SwiftUI
 
+//This can be renamed to something like CoreDataProvider or something like that
 class CoreDataManager {
     
     let persistentContainer: NSPersistentContainer
