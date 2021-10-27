@@ -28,7 +28,8 @@ struct MovieListScreen: View {
             ForEach(movieListVM.movies, id: \.id) { movie in
                 
                 NavigationLink {
-                    ReviewListScreen(movie: movie)
+                    //ReviewListScreen(movie: movie)
+                    MovieDetailScreen(movie: movie)
                 } label: {
                     MovieCell(movie: movie)
                 }
