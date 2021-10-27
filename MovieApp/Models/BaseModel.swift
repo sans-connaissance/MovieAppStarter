@@ -29,6 +29,7 @@ extension BaseModel {
         do {
           try  Self.viewContext.save()
         } catch {
+            Self.viewContext.rollback()
             print(error)
         }
         
