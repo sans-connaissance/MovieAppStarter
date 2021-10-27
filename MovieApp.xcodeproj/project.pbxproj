@@ -19,6 +19,8 @@
 		414AD1452721CB4600316A45 /* AddMovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414AD1442721CB4600316A45 /* AddMovieViewModel.swift */; };
 		414AD1472723037600316A45 /* MovieListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414AD1462723037600316A45 /* MovieListViewModel.swift */; };
 		416C8A582729E28600653032 /* MovieDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C8A572729E28600653032 /* MovieDetailScreen.swift */; };
+		416C8A5B2729E2E800653032 /* ActorListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C8A592729E2E800653032 /* ActorListScreen.swift */; };
+		416C8A5C2729E2E800653032 /* AddActorScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416C8A5A2729E2E800653032 /* AddActorScreen.swift */; };
 		41E5A49C2721B5E600A51D80 /* MoveAppModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 41E5A49A2721B5E600A51D80 /* MoveAppModel.xcdatamodeld */; };
 		8D0926C125E59B3B00502FF8 /* MovieAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D0926C025E59B3B00502FF8 /* MovieAppApp.swift */; };
 		8D0926C525E59B3C00502FF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D0926C425E59B3C00502FF8 /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		414AD1442721CB4600316A45 /* AddMovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddMovieViewModel.swift; sourceTree = "<group>"; };
 		414AD1462723037600316A45 /* MovieListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListViewModel.swift; sourceTree = "<group>"; };
 		416C8A572729E28600653032 /* MovieDetailScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailScreen.swift; sourceTree = "<group>"; };
+		416C8A592729E2E800653032 /* ActorListScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActorListScreen.swift; sourceTree = "<group>"; };
+		416C8A5A2729E2E800653032 /* AddActorScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddActorScreen.swift; sourceTree = "<group>"; };
 		41E5A49B2721B5E600A51D80 /* MoveAppModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MoveAppModel.xcdatamodel; sourceTree = "<group>"; };
 		8D0926BD25E59B3B00502FF8 /* MovieApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D0926C025E59B3B00502FF8 /* MovieAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieAppApp.swift; sourceTree = "<group>"; };
@@ -150,6 +154,8 @@
 				4139F51727276F7300E6EC5C /* AddReviewScreen.swift */,
 				4139F51827276F7300E6EC5C /* ReviewListScreen.swift */,
 				416C8A572729E28600653032 /* MovieDetailScreen.swift */,
+				416C8A592729E2E800653032 /* ActorListScreen.swift */,
+				416C8A5A2729E2E800653032 /* AddActorScreen.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -241,6 +247,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D5C25C325E6EBD0002BAF40 /* AddMovieScreen.swift in Sources */,
+				416C8A5B2729E2E800653032 /* ActorListScreen.swift in Sources */,
 				8D5C25E225E72CD4002BAF40 /* Date+Extensions.swift in Sources */,
 				41E5A49C2721B5E600A51D80 /* MoveAppModel.xcdatamodeld in Sources */,
 				8D0926D525E5AE9C00502FF8 /* CoreDataManager.swift in Sources */,
@@ -250,6 +257,7 @@
 				414AD1452721CB4600316A45 /* AddMovieViewModel.swift in Sources */,
 				4139F5242727723400E6EC5C /* Review+CoreDataProperties.swift in Sources */,
 				4139F51D27276F7C00E6EC5C /* ReviewListViewModel.swift in Sources */,
+				416C8A5C2729E2E800653032 /* AddActorScreen.swift in Sources */,
 				4139F5232727723400E6EC5C /* Review+CoreDataClass.swift in Sources */,
 				4139F51E27276F7C00E6EC5C /* AddReviewViewModel.swift in Sources */,
 				4139F51A27276F7300E6EC5C /* ReviewListScreen.swift in Sources */,
