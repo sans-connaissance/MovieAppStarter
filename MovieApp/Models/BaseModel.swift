@@ -41,4 +41,15 @@ extension BaseModel {
         }
     }
     
+    // THIS IS SO COOL!!!!
+    static func byId<T>(id: NSManagedObjectID) -> T? where T: NSManagedObject {
+        
+        do {
+            return try CoreDataManager.shared.viewContext.existingObject(with: id) as? T
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
 }
