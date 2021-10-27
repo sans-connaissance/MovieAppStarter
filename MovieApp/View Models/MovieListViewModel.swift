@@ -11,18 +11,20 @@ import CoreData
 
 class MovieListViewModel: ObservableObject {
     
-   @Published var movies = [MovieViewModel]()
+    @Published var movies = [MovieViewModel]()
     
     func deleteMovie(movie: MovieViewModel) {
-        let movie = CoreDataManager.shared.getMovieById(id: movie.id)
+        
+        // It's important to make this an optional -- otherwise there will be weird errors
+        let movie: Movie? = Movie.byId(id: movie.id)
         if let movie = movie {
-            CoreDataManager.shared.deleteMovie(movie)
+            movie.delete()
         }
     }
     
     func getAllMovies() {
-        
-        let movies = CoreDataManager.shared.getAllMovies()
+        //Had to add type here in order to fix warning/error
+        let movies: [Movie] = Movie.all()
         DispatchQueue.main.async {
             self.movies = movies.map(MovieViewModel.init)
         }

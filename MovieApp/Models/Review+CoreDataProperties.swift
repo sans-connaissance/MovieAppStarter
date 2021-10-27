@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-extension Review {
+extension Review: BaseModel {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Review> {
         return NSFetchRequest<Review>(entityName: "Review")
