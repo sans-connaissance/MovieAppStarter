@@ -13,25 +13,27 @@ struct ReviewListScreen: View {
     @State private var isPresented: Bool = false
     @StateObject private var reviewListVM = ReviewListViewModel()
     
-    
     var body: some View {
         VStack {
-            List(reviewListVM.reviews, id: \.reviewId) { review in
-                HStack {
-                    VStack(alignment: .leading) {
-                        Text(review.title)
-                        Text(review.text)
-                            .font(.caption)
-                        
+            List {
+                Section(header: Text("Reviews")) {
+                    ForEach(reviewListVM.reviews, id: \.reviewId) { review in
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(review.title)
+                                Text(review.text)
+                                    .font(.caption)
+                            }
+                            Spacer()
+                            Text(review.publishedDate!.asFormattedString())
+                        }
                     }
-                    Spacer()
-                    Text(review.publishedDate!.asFormattedString())
                 }
             }
         }
         .navigationTitle(movie.title)
         .navigationBarItems(trailing: Button("Add New Review") {
-             isPresented = true
+            isPresented = true
         })
         .sheet(isPresented: $isPresented, onDismiss: {
             reviewListVM.getReviewsByMovie(vm: movie)
@@ -45,11 +47,9 @@ struct ReviewListScreen: View {
 }
 
 struct ReviewListScreen_Previews: PreviewProvider {
-        
     static var previews: some View {
         
         let movie = MovieViewModel(movie: Movie(context: CoreDataManager.shared.viewContext))
-        
         ReviewListScreen(movie: movie).embedInNavigationView()
     }
 }
