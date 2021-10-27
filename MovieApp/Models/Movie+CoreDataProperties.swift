@@ -10,7 +10,9 @@ import Foundation
 import CoreData
 
 
-extension Movie {
+extension Movie: BaseModel {
+    
+    
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<Movie> {
         return NSFetchRequest<Movie>(entityName: "Movie")
