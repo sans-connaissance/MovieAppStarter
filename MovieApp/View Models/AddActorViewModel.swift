@@ -21,7 +21,7 @@ class AddActorViewModel: ObservableObject {
             actor.name = name
             actor.addToMovies(movie)
             
-            try? actor.save()
+            actor.save()
         }
         
     }
