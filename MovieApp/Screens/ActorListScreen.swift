@@ -10,6 +10,9 @@ import SwiftUI
 struct ActorListScreen: View {
     
     @State private var isPresented: Bool = false
+    let movie: MovieViewModel
+    
+    
     
     var body: some View {
            
@@ -42,7 +45,7 @@ struct ActorListScreen: View {
         .sheet(isPresented: $isPresented, onDismiss: {
             
         }, content: {
-            
+            AddActorScreen(movie: movie)
         })
         .navigationTitle("Movie Title")
         .navigationBarItems(trailing: Button(action: {
@@ -57,7 +60,16 @@ struct ActorListScreen: View {
 struct ActorListScreen_Previews: PreviewProvider {
     static var previews: some View {
         
-         ActorListScreen()
+        let movie = Movie(context: CoreDataManager.shared.viewContext)
+        movie.title = "Lord of the Rings"
+        let actor = Actor(context: CoreDataManager.shared.viewContext)
+        actor.name = "Tom Hanks"
+        movie.addToActors(actor)
+        
+        return ActorListScreen(movie: MovieViewModel(movie: movie))
             .embedInNavigationView()
+        
+        
+        
     }
 }

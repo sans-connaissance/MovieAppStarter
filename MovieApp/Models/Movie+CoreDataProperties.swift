@@ -40,6 +40,9 @@ extension Movie {
 
     @objc(removeReviews:)
     @NSManaged public func removeFromReviews(_ values: NSSet)
+    
+    @objc(addActorsObject:)
+    @NSManaged public func addToActors(_ value: Actor)
 
 }
 
