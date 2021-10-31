@@ -18,6 +18,17 @@ extension Actor: BaseModel {
 
     @NSManaged public var name: String?
     @NSManaged public var movies: NSSet?
+    
+    
+    static func getActorsByMovieId(movieId: NSManagedObjectID) -> [Actor] {
+        guard let movie = Movie.byId(id: movieId) as? Movie,
+              let actors = movie.actors
+        else {
+            return []
+        }
+        
+        return (actors.allObjects as? [Actor]) ?? []
+    }
 
 }
 
@@ -39,5 +50,7 @@ extension Actor {
 }
 
 extension Actor : Identifiable {
+    
+
 
 }

@@ -19,7 +19,7 @@ struct AddActorScreen: View {
                 VStack(alignment: .leading) {
                     Text("Add Actor")
                         .font(.largeTitle)
-                    Text("Lord of the Rings")
+                    Text(movie.title)
                 }.padding(.bottom, 50)
                 TextField("Enter name", text: $addActorVM.name)
                 HStack {

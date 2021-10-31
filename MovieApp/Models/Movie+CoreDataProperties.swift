@@ -23,6 +23,9 @@ extension Movie: BaseModel {
     @NSManaged public var releaseDate: Date?
     @NSManaged public var title: String?
     @NSManaged public var reviews: NSSet?
+    @NSManaged public var actors: NSSet?
+    
+    
 
 }
 
@@ -47,5 +50,6 @@ extension Movie {
 }
 
 extension Movie : Identifiable {
+    
 
 }
