@@ -17,6 +17,7 @@ struct ShowFiltersScreen: View {
     @State private var actorName: String = ""
     
     @Environment(\.presentationMode) var presentationMode
+    @StateObject private var filtersVM = FiltersViewModel()
     
     var body: some View {
         Form {
@@ -27,7 +28,11 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
-                       
+                        if let releaseDate = releaseDate.asDate() {
+                            filtersVM.filterMoviesByReleaseDate(releaseDate: releaseDate)
+                        }
+                        
+                        presentationMode.wrappedValue.dismiss()
                         
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
@@ -41,7 +46,7 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
-                       
+                        
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }
@@ -55,7 +60,7 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
-                       
+                        
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }
@@ -67,7 +72,7 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
-                       
+                        
                         
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
@@ -80,7 +85,7 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
-                       
+                        
                         
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
