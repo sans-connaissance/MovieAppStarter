@@ -43,6 +43,7 @@ struct ActorListScreen: View {
             actorListVM.getActorsByMovie(vm: movie)
         })
         .sheet(isPresented: $isPresented, onDismiss: {
+            actorListVM.getActorsByMovie(vm: movie)
             
         }, content: {
             AddActorScreen(movie: movie)
