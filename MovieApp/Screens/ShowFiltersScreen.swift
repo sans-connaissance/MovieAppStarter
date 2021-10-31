@@ -16,6 +16,8 @@ struct ShowFiltersScreen: View {
     @State private var movieTitle: String = ""
     @State private var actorName: String = ""
     
+    @Binding var movies: [MovieViewModel]
+    
     @Environment(\.presentationMode) var presentationMode
     @StateObject private var filtersVM = FiltersViewModel()
     
@@ -29,7 +31,7 @@ struct ShowFiltersScreen: View {
                     Button("Search") {
                         
                         if let releaseDate = releaseDate.asDate() {
-                            filtersVM.filterMoviesByReleaseDate(releaseDate: releaseDate)
+                            movies = filtersVM.filterMoviesByReleaseDate(releaseDate: releaseDate)
                         }
                         
                         presentationMode.wrappedValue.dismiss()
@@ -100,6 +102,6 @@ struct ShowFiltersScreen: View {
 
 struct ShowFiltersScreen_Previews: PreviewProvider {
     static var previews: some View {
-        ShowFiltersScreen()
+        ShowFiltersScreen(movies: .constant([MovieViewModel(movie: Movie())]))
     }
 }

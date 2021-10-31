@@ -7,10 +7,20 @@
 
 import SwiftUI
 
+enum Sheets: Identifiable {
+    
+    var id: UUID {
+        return UUID()
+    }
+    
+    case addMovie
+    case showFilters
+}
+
 struct MovieListScreen: View {
     
     @StateObject private var movieListVM = MovieListViewModel()
-    @State private var isPresented: Bool = false
+    @State private var activeSheet: Sheets?
     
     private func deleteMovie(at indexSet: IndexSet) {
         indexSet.forEach { index in
@@ -23,47 +33,68 @@ struct MovieListScreen: View {
     }
     
     var body: some View {
-        List {
-            
-            ForEach(movieListVM.movies, id: \.id) { movie in
-                
-                NavigationLink {
-                    //ReviewListScreen(movie: movie)
-                    MovieDetailScreen(movie: movie)
-                } label: {
-                    MovieCell(movie: movie)
+        VStack {
+            HStack {
+                Button("Reset") {
+                    movieListVM.getAllMovies()
+                }.padding()
+                Spacer()
+                Button("Filter") {
+                    activeSheet = .showFilters
                 }
-
-                
-                
-            }.onDelete(perform: deleteMovie)
+            }.padding(.trailing, 40)
             
-        }.listStyle(PlainListStyle())
-        .navigationTitle("Movies")
-        .navigationBarItems(trailing: Button("Add Movie") {
-            isPresented = true 
-        })
-        .sheet(isPresented: $isPresented, onDismiss: {
-            movieListVM.getAllMovies()
-        },  content: {
-            AddMovieScreen()
-        })
-        .embedInNavigationView()
-        
-        .onAppear(perform: {
-            UITableView.appearance().separatorStyle = .none
-            UITableView.appearance().separatorColor = .clear
-            movieListVM.getAllMovies()
+            List {
+                
+                ForEach(movieListVM.movies, id: \.id) { movie in
+                    NavigationLink(
+                        destination: MovieDetailScreen(movie: movie),
+                        label: {
+                            MovieCell(movie: movie)
+                        })
+                }.onDelete(perform: deleteMovie)
+                
+            }.listStyle(PlainListStyle())
             
+            .navigationTitle("Movies")
+            .navigationBarItems(trailing: Button("Add Movie") {
+                activeSheet = .addMovie
+            })
+            .sheet(item: $activeSheet, onDismiss: {
+                switch activeSheet {
+                    case .addMovie:
+                        movieListVM.getAllMovies()
+                    case .none, .showFilters:
+                        break
+                }
+            }, content: { item in
+                switch item {
+                    case .addMovie:
+                        AddMovieScreen()
+                    case .showFilters:
+                    ShowFiltersScreen(movies: $movieListVM.movies)
+                }
+            })
+            .onAppear(perform: {
+                UITableView.appearance().separatorStyle = .none
+                UITableView.appearance().separatorColor = .clear
+                movieListVM.getAllMovies()
         })
+        }.embedInNavigationView()
     }
 }
 
+struct MovieListScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            MovieListScreen()
+        }
+    }
+}
 
 struct MovieCell: View {
     
     let movie: MovieViewModel
-    
     
     var body: some View {
         HStack {
@@ -74,7 +105,11 @@ struct MovieCell: View {
                 Text(movie.director)
                     .font(.callout)
                     .opacity(0.5)
+                Text(movie.releaseDate ?? "")
+                    .font(.callout)
+                    .opacity(0.8)
                 Spacer()
+                
             }
             Spacer()
             HStack {
@@ -87,13 +122,5 @@ struct MovieCell: View {
         .foregroundColor(Color.black)
         .background(LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9567790627, green: 0.9569163918, blue: 0.9567491412, alpha: 1)), Color(#colorLiteral(red: 0.9685427547, green: 0.9686816335, blue: 0.9685124755, alpha: 1))]), startPoint: .leading, endPoint: /*@START_MENU_TOKEN@*/.trailing/*@END_MENU_TOKEN@*/))
         .clipShape(RoundedRectangle(cornerRadius: 15.0, style: .continuous))
-    }
-}
-
-struct MovieListScreen_Previews: PreviewProvider {
-    static var previews: some View {
-        Group {
-            MovieListScreen()
-        }
     }
 }
