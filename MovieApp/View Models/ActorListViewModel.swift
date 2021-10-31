@@ -15,6 +15,9 @@ class ActorListViewModel: ObservableObject {
     
     func getActorsByMovie(vm: MovieViewModel) {
         
+        DispatchQueue.main.async {
+            self.actors = Actor.getActorsByMovieId(movieId: vm.id).map(ActorViewModel.init)
+        }
         
     }
     
