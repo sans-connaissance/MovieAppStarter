@@ -39,6 +39,16 @@ extension Movie: BaseModel {
         
     }
     
+    static func byReleaseDate(releaseDate: Date) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K >= %@", #keyPath(Movie.releaseDate), releaseDate as NSDate)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            return []
+        }
+    }
 }
 
 // MARK: Generated accessors for reviews
