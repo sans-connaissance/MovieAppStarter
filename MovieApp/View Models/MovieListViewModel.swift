@@ -54,7 +54,7 @@ class MovieListViewModel: NSObject, ObservableObject {
     
     @Published var movies = [MovieViewModel]()
     @Published var filterEnabled: Bool = false
-    
+    @Published var sortEnabled: Bool = false
     @Published var selectedSortOption: SortOptions = .title
     @Published var selectedSortDirection: SortDirection = .ascending
 
