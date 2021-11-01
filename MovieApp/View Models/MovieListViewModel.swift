@@ -58,6 +58,8 @@ class MovieListViewModel: NSObject, ObservableObject {
     @Published var selectedSortOption: SortOptions = .title
     @Published var selectedSortDirection: SortDirection = .ascending
     
+    private var fetchedResultsController: NSFetchedResultsController<Movie>!
+    
     func deleteMovie(movie: MovieViewModel) {
         let movie: Movie? = Movie.byId(id: movie.movieId)
         if let movie = movie {
@@ -85,10 +87,25 @@ class MovieListViewModel: NSObject, ObservableObject {
     }
     
     func getAllMovies() {
+        
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        fetchedResultsController.delegate = self
+        try? fetchedResultsController.performFetch()
+        
         DispatchQueue.main.async {
-            self.movies = Movie.all().map(MovieViewModel.init)
+            self.movies = (self.fetchedResultsController.fetchedObjects ?? []).map(MovieViewModel.init)
         }
     }
+}
+
+extension MovieListViewModel: NSFetchedResultsControllerDelegate {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        self.movies = (controller.fetchedObjects as? [Movie] ?? []).map(MovieViewModel.init)
+    }
+    
 }
 
 struct MovieViewModel {
