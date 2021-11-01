@@ -111,7 +111,7 @@ struct MovieListScreen: View {
                         }
                         Button("Done") {
                             movieListVM.sortEnabled = false
-                            // peform sort
+                            movieListVM.sort()
                         }
                     }
                 }

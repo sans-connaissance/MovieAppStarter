@@ -15,19 +15,19 @@ enum SortDirection: CaseIterable {
     
     var value: Bool {
         switch self {
-            case .ascending:
-                return true
-            case .descending:
-                return false
+        case .ascending:
+            return true
+        case .descending:
+            return false
         }
     }
     
     var displayText: String {
         switch self {
-            case .ascending:
-                return "Ascending"
-            case .descending:
-                return "Descending"
+        case .ascending:
+            return "Ascending"
+        case .descending:
+            return "Descending"
         }
     }
 }
@@ -40,12 +40,12 @@ enum SortOptions: String, CaseIterable {
     
     var displayText: String {
         switch self {
-            case .title:
-                return "Title"
-            case .releaseDate:
-                return "Release Date"
-            case .rating:
-                return "Rating"
+        case .title:
+            return "Title"
+        case .releaseDate:
+            return "Release Date"
+        case .rating:
+            return "Rating"
         }
     }
 }
@@ -57,7 +57,7 @@ class MovieListViewModel: NSObject, ObservableObject {
     @Published var sortEnabled: Bool = false
     @Published var selectedSortOption: SortOptions = .title
     @Published var selectedSortDirection: SortDirection = .ascending
-
+    
     func deleteMovie(movie: MovieViewModel) {
         let movie: Movie? = Movie.byId(id: movie.movieId)
         if let movie = movie {
@@ -69,6 +69,18 @@ class MovieListViewModel: NSObject, ObservableObject {
         
         let request: NSFetchRequest<Movie> = Movie.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: selectedSortOption.rawValue, ascending: selectedSortDirection.value)]
+        
+        let fetchedResultsController: NSFetchedResultsController<Movie> = NSFetchedResultsController(fetchRequest: request, managedObjectContext: CoreDataManager.shared.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        
+        
+        //Example of multiple sort descriptors
+//        request.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true), NSSortDescriptor(key: "rating", ascending: false)]
+        
+        try? fetchedResultsController.performFetch()
+        
+        DispatchQueue.main.async {
+            self.movies = (fetchedResultsController.fetchedObjects ?? []).map(MovieViewModel.init)
+        }
         
     }
     
