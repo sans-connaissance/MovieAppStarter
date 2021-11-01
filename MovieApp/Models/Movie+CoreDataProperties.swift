@@ -91,6 +91,19 @@ extension Movie: BaseModel {
             return []
         }
     }
+    
+    static func byMovieTitle(title: String) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K BEGINSWITH[cd] %@", #keyPath(Movie.title), title)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error)
+            return []
+        }
+    }
+    
 }
 
 // MARK: Generated accessors for reviews
