@@ -67,6 +67,13 @@ struct ShowFiltersScreen: View {
                     Spacer()
                     Button("Search") {
                         
+                        let lowerBound = startDate.asDate()
+                        let upperBound = endDate.asDate()
+                        let minRating = Int(minimumRating)
+                        
+                       movies = filtersVM.filterMoviesByDateRangeOrMinimumRating(lowerBoundDate: lowerBound, upperBoundDate: upperBound, minimumRating: minRating)
+                        
+                        presentationMode.wrappedValue.dismiss()
                         
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
