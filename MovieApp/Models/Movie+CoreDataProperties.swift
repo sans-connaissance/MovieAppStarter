@@ -67,7 +67,7 @@ extension Movie: BaseModel {
         }
     }
     
-    static func byDateRangeOrMinimumRating(lower: Date?,  upper: Date?, minimumRating: Int?) {
+    static func byDateRangeOrMinimumRating(lower: Date?,  upper: Date?, minimumRating: Int?) -> [Movie] {
         
         var predicates: [NSPredicate] = []
         
@@ -79,6 +79,16 @@ extension Movie: BaseModel {
         } else if let minRating = minimumRating {
             let minRatingPredicate = NSPredicate(format: "%K >= %i", #keyPath(Movie.rating), minRating)
             predicates.append(minRatingPredicate)
+        }
+        
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSCompoundPredicate(orPredicateWithSubpredicates: predicates)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error)
+            return []
         }
     }
 }
