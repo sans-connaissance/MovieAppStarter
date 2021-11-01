@@ -51,7 +51,9 @@ extension Movie: BaseModel {
         
         
     }
-    
+
+    // keyPath is cool. It assigns that value to the %K placeholder.
+    // and %@ is a placeholder for the functions parameter
     static func byDateRange(lower: Date, upper: Date) -> [Movie] {
         
         let request: NSFetchRequest<Movie> = Movie.fetchRequest()
@@ -62,6 +64,21 @@ extension Movie: BaseModel {
         } catch {
             print(error)
             return []
+        }
+    }
+    
+    static func byDateRangeOrMinimumRating(lower: Date?,  upper: Date?, minimumRating: Int?) {
+        
+        var predicates: [NSPredicate] = []
+        
+        if let lower = lower, let upper = upper {
+            let dateRangePredicate = NSPredicate(format: "%K >= %@ AND %K <= %@", #keyPath(Movie.releaseDate),lower as NSDate,#keyPath(Movie.releaseDate),upper as NSDate)
+            
+            predicates.append(dateRangePredicate)
+            
+        } else if let minRating = minimumRating {
+            let minRatingPredicate = NSPredicate(format: "%K >= %i", #keyPath(Movie.rating), minRating)
+            predicates.append(minRatingPredicate)
         }
     }
 }

@@ -52,6 +52,8 @@ struct ShowFiltersScreen: View {
                         
                         movies = filtersVM.filterMoviesByReleaseDate(lowerBoundDate: lowerBound, upperBoundDate: upperBound)
                         
+                        presentationMode.wrappedValue.dismiss()
+                        
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                 }
