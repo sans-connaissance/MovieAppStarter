@@ -105,9 +105,11 @@ extension Movie: BaseModel {
         }
     }
     
-    static func byMinimumReviewCount(minimumReviewCount: Int = 1) -> [Movie] {
+    static func byMinimumReviewCount(minimumReviewCount: Int = 0) -> [Movie] {
         let request: NSFetchRequest<Movie> = Movie.fetchRequest()
-        request.predicate = NSPredicate(format: "reviews.@count >= %i", minimumReviewCount)
+        
+        request.predicate = NSPredicate(format: "%K.@count >= %i", #keyPath(Movie.reviews), minimumReviewCount)
+       // request.predicate = NSPredicate(format: "reviews.@count >= %i", minimumReviewCount)
         
         do {
             return try viewContext.fetch(request)
