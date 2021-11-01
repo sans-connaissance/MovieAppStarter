@@ -15,7 +15,7 @@ class ReviewListViewModel: ObservableObject {
     func getReviewsByMovie(vm: MovieViewModel) {
         DispatchQueue.main.async {
             
-            self.reviews = Review.getReviewsByMovieId(movieId: vm.id).map(ReviewViewModel.init)
+            self.reviews = Review.getReviewsByMovieId(movieId: vm.movieId).map(ReviewViewModel.init)
         }
     }
 }

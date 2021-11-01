@@ -15,7 +15,7 @@ struct ActorDetailsScreen: View {
     
     var body: some View {
         VStack {
-            List(actor.movies, id: \.id) { movie in
+            List(actor.movies, id: \.movieId) { movie in
                 MovieCell(movie: movie)
                 
             }.listStyle(PlainListStyle())

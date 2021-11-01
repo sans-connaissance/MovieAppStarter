@@ -60,7 +60,7 @@ struct MovieListScreen: View {
             
             List {
                 
-                ForEach(movieListVM.movies, id: \.id) { movie in
+                ForEach(movieListVM.movies, id: \.movieId) { movie in
                     NavigationLink(
                         destination: MovieDetailScreen(movie: movie),
                         label: {

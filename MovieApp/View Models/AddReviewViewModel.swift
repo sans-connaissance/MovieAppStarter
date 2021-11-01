@@ -14,7 +14,7 @@ class AddReviewViewModel: ObservableObject {
     
     func addReviewForMovie(vm: MovieViewModel) {
         
-        let movie: Movie? = Movie.byId(id: vm.id)
+        let movie: Movie? = Movie.byId(id: vm.movieId)
         
         if let movie = movie {
             let review = Review(context: Review.viewContext)

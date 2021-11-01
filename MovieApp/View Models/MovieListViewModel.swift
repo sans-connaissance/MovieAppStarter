@@ -2,42 +2,82 @@
 //  MovieListViewModel.swift
 //  MovieApp
 //
-//  Created by David Malicke on 10/22/21.
+//  Created by Mohammad Azam on 2/26/21.
 //
 
 import Foundation
 import CoreData
 
+enum SortDirection: CaseIterable {
+    
+    case ascending
+    case descending
+    
+    var value: Bool {
+        switch self {
+            case .ascending:
+                return true
+            case .descending:
+                return false
+        }
+    }
+    
+    var displayText: String {
+        switch self {
+            case .ascending:
+                return "Ascending"
+            case .descending:
+                return "Descending"
+        }
+    }
+}
 
-class MovieListViewModel: ObservableObject {
+enum SortOptions: String, CaseIterable {
+    
+    case title
+    case releaseDate
+    case rating
+    
+    var displayText: String {
+        switch self {
+            case .title:
+                return "Title"
+            case .releaseDate:
+                return "Release Date"
+            case .rating:
+                return "Rating"
+        }
+    }
+}
+
+class MovieListViewModel: NSObject, ObservableObject {
     
     @Published var movies = [MovieViewModel]()
+    @Published var filterEnabled: Bool = false
     
+    @Published var selectedSortOption: SortOptions = .title
+    @Published var selectedSortDirection: SortDirection = .ascending
+
     func deleteMovie(movie: MovieViewModel) {
-        
-        // It's important to make this an optional -- otherwise there will be weird errors
-        let movie: Movie? = Movie.byId(id: movie.id)
+        let movie: Movie? = Movie.byId(id: movie.movieId)
         if let movie = movie {
             movie.delete()
         }
     }
     
+    
     func getAllMovies() {
-        //Had to add type here in order to fix warning/error
-        let movies: [Movie] = Movie.all()
         DispatchQueue.main.async {
-            self.movies = movies.map(MovieViewModel.init)
+            self.movies = Movie.all().map(MovieViewModel.init)
         }
     }
-    
 }
-
 
 struct MovieViewModel {
     
     let movie: Movie
     
-    var id: NSManagedObjectID {
+    var movieId: NSManagedObjectID {
         return movie.objectID
     }
     
@@ -47,16 +87,13 @@ struct MovieViewModel {
     
     var director: String {
         return movie.director ?? "Not available"
-        
     }
     
-    var releaseDate: String {
-        return movie.releaseDate?.asFormattedString() ?? ""
+    var releaseDate: String? {
+        return movie.releaseDate?.asFormattedString()
     }
     
     var rating: Int? {
-        
         return Int(movie.rating)
     }
-    
 }

@@ -29,7 +29,7 @@ struct AddActorScreen: View {
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
                     Button("Save") {
-                        addActorVM.addActorToMovie(movieId: movie.id)
+                        addActorVM.addActorToMovie(movieId: movie.movieId)
                         presentationMode.wrappedValue.dismiss()
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
