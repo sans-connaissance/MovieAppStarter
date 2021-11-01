@@ -13,7 +13,11 @@ class FiltersViewModel: ObservableObject {
     func filterMoviesByReleaseDate(releaseDate: Date) -> [MovieViewModel] {
         return Movie.byReleaseDate(releaseDate: releaseDate).map(MovieViewModel.init)
         
-        
+    }
+    
+    
+    func filterMoviesByReleaseDate(lowerBoundDate: Date, upperBoundDate: Date) -> [MovieViewModel] {
+        return Movie.byDateRange(lower: lowerBoundDate, upper: upperBoundDate).map(MovieViewModel.init)
         
     }
     

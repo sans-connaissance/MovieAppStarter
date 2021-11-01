@@ -48,6 +48,21 @@ extension Movie: BaseModel {
         } catch {
             return []
         }
+        
+        
+    }
+    
+    static func byDateRange(lower: Date, upper: Date) -> [Movie] {
+        
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "%K >= %@ AND %K <= %@", #keyPath(Movie.releaseDate),lower as NSDate,#keyPath(Movie.releaseDate),upper as NSDate)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error)
+            return []
+        }
     }
 }
 
