@@ -29,7 +29,8 @@ extension Movie: BaseModel {
         
         let request: NSFetchRequest<Movie> = Movie.fetchRequest()
         request.predicate = NSPredicate(format: "actors.name CONTAINS %@", name)
-        
+        //request.predicate = NSPredicate(format: "%K.name CONTAINS %@", #keyPath(Movie.actors), name)
+        //request.predicate = NSPredicate(format: "%K.%K CONTAINS %@", #keyPath(Movie.actors), #keyPath(Actor.name), name)
         do {
             return try viewContext.fetch(request)
         } catch {
@@ -102,6 +103,19 @@ extension Movie: BaseModel {
             print(error)
             return []
         }
+    }
+    
+    static func byMinimumReviewCount(minimumReviewCount: Int = 1) -> [Movie] {
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.predicate = NSPredicate(format: "reviews.@count >= %i", minimumReviewCount)
+        
+        do {
+            return try viewContext.fetch(request)
+        } catch {
+            print(error)
+            return []
+        }
+        
     }
     
 }
