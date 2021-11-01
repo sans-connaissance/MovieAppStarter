@@ -65,6 +65,12 @@ class MovieListViewModel: NSObject, ObservableObject {
         }
     }
     
+    func sort() {
+        
+        let request: NSFetchRequest<Movie> = Movie.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: selectedSortOption.rawValue, ascending: selectedSortDirection.value)]
+        
+    }
     
     func getAllMovies() {
         DispatchQueue.main.async {
