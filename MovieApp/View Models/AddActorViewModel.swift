@@ -10,7 +10,7 @@ import CoreData
 
 class AddActorViewModel: ObservableObject {
     
-    var name: String = ""
+    @Published var name: String = ""
     
     func addActorToMovie(movieId: NSManagedObjectID) {
         

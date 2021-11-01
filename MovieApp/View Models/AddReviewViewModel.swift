@@ -9,8 +9,8 @@ import Foundation
 
 class AddReviewViewModel: ObservableObject {
     
-    var title: String = ""
-    var body: String = ""
+    @Published var title: String = ""
+    @Published var body: String = ""
     
     func addReviewForMovie(vm: MovieViewModel) {
         

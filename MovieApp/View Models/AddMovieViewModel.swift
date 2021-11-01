@@ -9,10 +9,10 @@ import Foundation
 
 class AddMovieViewModel: ObservableObject {
     
-    var title: String = ""
-    var director: String = ""
+    @Published var title: String = ""
+    @Published var director: String = ""
    @Published var rating: Int? = nil
-    var releaseDate: Date = Date()
+    @Published var releaseDate: Date = Date()
     
     func save() {
         
