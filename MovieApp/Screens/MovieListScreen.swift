@@ -21,7 +21,6 @@ struct MovieListScreen: View {
     
     @StateObject private var movieListVM = MovieListViewModel()
     @State private var activeSheet: Sheets?
-    @State private var filterApplied = false
     
     private func deleteMovie(at indexSet: IndexSet) {
         indexSet.forEach { index in
@@ -33,18 +32,31 @@ struct MovieListScreen: View {
         }
     }
     
+    private func getAllMovies() {
+        if !movieListVM.filterEnabled {
+            movieListVM.getAllMovies()
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack {
                 Button("Reset") {
                     movieListVM.getAllMovies()
                 }.padding()
+                Button("Sort") {
+                    
+                }
                 Spacer()
-                Button("Filter") {
-                    filterApplied = true
-                    activeSheet = .showFilters
+                VStack(spacing: 10) {
+                    Button("Filter") {
+                        movieListVM.filterEnabled = true
+                        activeSheet = .showFilters
+                    }
                 }
             }.padding(.trailing, 40)
+            .background(Color(#colorLiteral(red: 0.202427417, green: 0.5955722928, blue: 0.8584871888, alpha: 1)))
+            .foregroundColor(.white)
             
             List {
                 
@@ -63,23 +75,47 @@ struct MovieListScreen: View {
                 activeSheet = .addMovie
             })
             .sheet(item: $activeSheet, onDismiss: {
-                if(!filterApplied) {
-                    movieListVM.getAllMovies()
-                }
-                
+                getAllMovies()
             }, content: { item in
                 switch item {
                     case .addMovie:
                         AddMovieScreen()
                     case .showFilters:
-                    ShowFiltersScreen(movies: $movieListVM.movies)
+                        ShowFiltersScreen(movies: $movieListVM.movies)
+
                 }
             })
             .onAppear(perform: {
-                UITableView.appearance().separatorStyle = .none
-                UITableView.appearance().separatorColor = .clear
-                movieListVM.getAllMovies()
+                getAllMovies()
         })
+                GeometryReader { geometry in
+                    VStack {
+                        HStack {
+                            Spacer()
+                            Picker("Select title", selection: $movieListVM.selectedSortOption) {
+                                ForEach(SortOptions.allCases, id: \.self) {
+                                    Text($0.displayText)
+                                }
+                            }.frame(width: geometry.size.width/3, height: 100)
+                            .clipped()
+                            
+                            Picker("Sort Direction", selection: $movieListVM.selectedSortDirection) {
+                                ForEach(SortDirection.allCases, id: \.self) {
+                                    Text($0.displayText)
+                                }
+                            }.frame(width: geometry.size.width/3, height: 100)
+                            .clipped()
+                            
+                            Spacer()
+                        }
+                        Button("Done") {
+                           
+                        }
+                    }
+                }
+            
+            
+            
         }.embedInNavigationView()
     }
 }
