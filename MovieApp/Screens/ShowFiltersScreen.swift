@@ -13,6 +13,7 @@ struct ShowFiltersScreen: View {
     @State private var startDate: String = ""
     @State private var endDate: String = ""
     @State private var minimumRating: String = ""
+    @State private var minimumReviewCount: String = ""
     @State private var movieTitle: String = ""
     @State private var actorName: String = ""
     
@@ -71,7 +72,7 @@ struct ShowFiltersScreen: View {
                         let upperBound = endDate.asDate()
                         let minRating = Int(minimumRating)
                         
-                       movies = filtersVM.filterMoviesByDateRangeOrMinimumRating(lowerBoundDate: lowerBound, upperBoundDate: upperBound, minimumRating: minRating)
+                        movies = filtersVM.filterMoviesByDateRangeOrMinimumRating(lowerBoundDate: lowerBound, upperBoundDate: upperBound, minimumRating: minRating)
                         
                         presentationMode.wrappedValue.dismiss()
                         
@@ -101,6 +102,22 @@ struct ShowFiltersScreen: View {
                     Button("Search") {
                         
                         
+                        
+                    }.buttonStyle(PlainButtonStyle())
+                    Spacer()
+                }
+            }
+            
+            Section(header: Text("Search by Minimum Review Count")) {
+                TextField("Enter review count", text: $minimumReviewCount)
+                HStack {
+                    Spacer()
+                    Button("Search") {
+                        if !minimumReviewCount.isEmpty {
+                            movies = filtersVM.filterMoviesByMinimumReviewCount(minimumReviewCount: Int(minimumReviewCount) ?? 0)
+                        }
+                        
+                        presentationMode.wrappedValue.dismiss()
                         
                     }.buttonStyle(PlainButtonStyle())
                     Spacer()
